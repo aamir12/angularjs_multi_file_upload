@@ -1,2 +1,4 @@
 # Upload  Multiple file using angularjs and php
-In this mini project, I have used angularjs as frontend and php as a backend to upload multiple files.
+1) In this mini project, I have used angularjs as frontend and php as a backend to upload multiple files.
+2)It include both add and edit operations which repeatedly used in CRUD operations.
+
