@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .w50px{
+            width: 50px;
+        }
+        .img-wh{
+            width: 150px;
+            height: 200;
+            display:block;
+            margin:10px auto;
+        }
+        .d-0{
+            display: none !important;
+        }
+        .va-m{
+            vertical-align: middle !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper"  ng-app="myApp" ng-controller="optionController" ng-cloak >
+        <h4>Add Optons values</h4>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <tr>
+                <th>
+                    Option Value Name
+                </th>
+                <th>Image</th>
+                <th>
+                    Sort Order
+                </th>
+                <th class="w50px"></th>
+                </tr>
+
+            <tr ng-repeat="option in Options" ng-cloak >
+                <td class="text-center va-m">
+                    <button 
+                        class="btn btn-primary"
+                        type="button"
+                        ng-click="chooseImg($index)">
+                        Upload
+                    </button>
+                    <button 
+                      class="btn btn-danger"
+                      ng-click="removeImg($index)"
+                      ng-if="option.img != ''"
+                      type="button">
+                        Remove
+                    </button>
+                    
+                    <input class="d-0" accept="image/*"  type="file" id="img_{{$index}}" fileread="option.img" />
+                    <img class="img-wh" ng-src="{{option.img}}" ng-if="option.img != ''" alt="">
+                </td>
+                <td class="va-m">
+                    <input type="text"  class="form-control" ng-model="option.optionKey">
+                </td>
+                <td class="va-m">
+                    <input type="number" class="form-control" ng-model="option.sortOrder">
+                </td>
+                <td class="va-m">
+                    <button type="danger" ng-click="deleteOption($index)" class="btn btn-danger">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr ng-if="Options.length<maximumImgs">
+                <td colspan="3" class="text-center va-m">Maximum {{ maximumImgs }} Records</td>
+                <td class="w50px va-m">
+                    <button type="button" class="btn btn-primary" ng-click="addOption()">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </td>
+            </tr>
+            </table>
+        </div>
+        <div class="text-center">
+            <button ng-disabled="Options.length==0" class="btn btn-primary" ng-click="saveOption()">Save</button>
+        </div>
+
+        <hr>
+
+        <h4>Edit Optons values</h4>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <tr>
+                <th>
+                    Option Value Name
+                </th>
+                <th>Image</th>
+                <th>
+                    Sort Order
+                </th>
+                <th class="w50px"></th>
+                </tr>
+
+            <tr ng-repeat="option in editOptions" ng-cloak >
+                <td class="text-center va-m">
+                    <button 
+                        class="btn btn-primary"
+                        type="button"
+                        ng-click="chooseEditImg($index)">
+                        Upload
+                    </button>
+                    <button 
+                      class="btn btn-danger"
+                      ng-click="removeEditImg($index)"
+                      ng-if="option.img != ''"
+                      type="button">
+                        Remove
+                    </button>
+                    <input class="d-0" accept="image/*"  type="file" id="editImg_{{$index}}" fileread="option.img" />
+                    <img class="img-wh" ng-src="{{option.img}}" ng-if="option.img != ''" alt="">
+                </td>
+                <td class="va-m">
+                    <input type="text"  class="form-control" ng-model="option.optionKey">
+                </td>
+               
+                <td class="va-m">
+                    <input type="number" class="form-control" tonumber ng-model="option.sortOrder">
+                </td>
+                <td class="va-m">
+                    <button type="danger" ng-click="deleteEditOption($index)" class="btn btn-danger">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr ng-if="editOptions.length<maximumImgs">
+                <td colspan="3" class="text-center va-m">Maximum {{ maximumImgs }} Records</td>
+                <td class="w50px va-m">
+                    <button type="button" class="btn btn-primary" ng-click="addEditOption()">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </td>
+            </tr>
+            </table>
+        </div>
+        <div class="text-center">
+            <button ng-disabled="editOptions.length==0" class="btn btn-primary" ng-click="updateOption()">Save</button>
+        </div>
+        
+    </div>
+</body>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+<script src="optionsController.js"></script>
+
+</html>
